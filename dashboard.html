@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Principal - Gestión 360 ERP</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="img/logo.png" alt="Gestión 360" class="sidebar-logo">
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active">
+                    <span class="icon">📊</span>
+                    <span class="text">Dashboard</span>
+                </a>
+
+                <div class="nav-dropdown">
+                    <button class="dropdown-btn">
+                        <span class="icon">👥</span>
+                        <span class="text">Gestión Usuarios</span>
+                        <span class="arrow">▸</span>
+                    </button>
+                    <div class="dropdown-container">
+                        <a href="usuarios.html">Lista de Usuarios</a>
+                        <a href="#">Roles y Permisos</a>
+                        <a href="#">Auditoría de Sesiones</a>
+                    </div>
+                </div>
+
+                <div class="nav-dropdown">
+                    <button class="dropdown-btn">
+                        <span class="icon">📦</span>
+                        <span class="text">Inventario</span>
+                        <span class="arrow">▸</span>
+                    </button>
+                    <div class="dropdown-container">
+                        <a href="#">Catálogo Productos</a>
+                        <a href="#">Entradas / Salidas</a>
+                        <a href="#">Alertas de Stock</a>
+                        <a href="#">Categorías</a>
+                    </div>
+                </div>
+
+                <div class="nav-dropdown">
+                    <button class="dropdown-btn">
+                        <span class="icon">💳</span>
+                        <span class="text">Ventas</span>
+                        <span class="arrow">▸</span>
+                    </button>
+                    <div class="dropdown-container">
+                        <a href="#">Nueva Venta (POS)</a>
+                        <a href="#">Historial Facturas</a>
+                        <a href="#">Clientes</a>
+                    </div>
+                </div>
+
+                <div class="nav-dropdown">
+                    <button class="dropdown-btn">
+                        <span class="icon">📈</span>
+                        <span class="text">Reportes</span>
+                        <span class="arrow">▸</span>
+                    </button>
+                    <div class="dropdown-container">
+                        <a href="#">Ventas Mensuales</a>
+                        <a href="#">Rotación de Inventario</a>
+                        <a href="#">Exportar a Excel/PDF</a>
+                    </div>
+                </div>
+
+                <a href="#" class="nav-item">
+                    <span class="icon">⚙️</span>
+                    <span class="text">Configuración</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="login.html" class="logout-btn">
+                    <span class="icon">🚪</span>
+                    <span class="text">Cerrar Sesión</span>
+                </a>
+            </div>
+        </aside>
+
+        <div class="main-content">
+            <header class="top-header">
+                <div class="search-bar">
+                    <input type="text" placeholder="🔍 Buscar facturas, productos, usuarios...">
+                </div>
+
+                <div class="user-menu">
+                    <button class="icon-btn" title="Notificaciones">🔔<span class="notification-badge">3</span></button>
+                    <div class="user-profile">
+                        <span class="avatar">👤</span>
+                        <div class="user-info">
+                            <span class="user-name">Yeins Gómez</span>
+                            <span class="user-role">Administrador</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="content-body">
+                <div class="page-title">
+                    <h1>Panel de Control Principal</h1>
+                    <p>Resumen general del estado del sistema e indicadores clave</p>
+                </div>
+
+                <section class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-icon blue">💰</div>
+                        <div class="kpi-details">
+                            <h3>Ventas del Mes</h3>
+                            <p class="value">$ 45.850.000</p>
+                            <span class="trend positive">▲ +12% vs mes anterior</span>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-icon green">📦</div>
+                        <div class="kpi-details">
+                            <h3>Productos en Stock</h3>
+                            <p class="value">1.420 items</p>
+                            <span class="trend neutral">● 24 categorías</span>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-icon orange">⚠️</div>
+                        <div class="kpi-details">
+                            <h3>Alertas de Stock</h3>
+                            <p class="value">8 productos</p>
+                            <span class="trend negative">▼ Requiere reabastecimiento</span>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-icon purple">👥</div>
+                        <div class="kpi-details">
+                            <h3>Clientes Activos</h3>
+                            <p class="value">384</p>
+                            <span class="trend positive">▲ +5 nuevos hoy</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="charts-grid">
+                    <div class="chart-card">
+                        <div class="card-header">
+                            <h2>Comportamiento de Ventas (2026)</h2>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="salesChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="card-header">
+                            <h2>Top Categorías Más Vendidas</h2>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="categoriesChart"></canvas>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="table-card">
+                    <div class="card-header">
+                        <h2>Últimas Ventas Registradas</h2>
+                        <a href="#" class="view-all">Ver todas →</a>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th># Factura</th>
+                                <th>Cliente</th>
+                                <th>Fecha y Hora</th>
+                                <th>Total</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>#FAC-0924</strong></td>
+                                <td>Carlos Rodríguez</td>
+                                <td>Hoy, 02:15 PM</td>
+                                <td>$ 320.000</td>
+                                <td><span class="status paid">Completado</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>#FAC-0923</strong></td>
+                                <td>Empresa Alfa S.A.S</td>
+                                <td>Hoy, 11:30 AM</td>
+                                <td>$ 1.450.000</td>
+                                <td><span class="status paid">Completado</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>#FAC-0922</strong></td>
+                                <td>María López</td>
+                                <td>Ayer, 04:45 PM</td>
+                                <td>$ 85.000</td>
+                                <td><span class="status pending">Pendiente</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.dropdown-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const container = button.nextElementSibling;
+                const arrow = button.querySelector('.arrow');
+                
+                // Alternar visibilidad
+                if (container.style.display === "block") {
+                    container.style.display = "none";
+                    arrow.style.transform = "rotate(0deg)";
+                } else {
+                    container.style.display = "block";
+                    arrow.style.transform = "rotate(90deg)";
+                }
+            });
+        });
+
+        const ctxSales = document.getElementById('salesChart').getContext('2d');
+        new Chart(ctxSales, {
+            type: 'line',
+            data: {
+                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct'],
+                datasets: [{
+                    label: 'Ventas ($ COP)',
+                    data: [25000000, 28000000, 32000000, 30000000, 38000000, 42000000, 40000000, 44000000, 41000000, 45850000],
+                    borderColor: '#2563eb',
+                    backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
+        });
+
+        // 3. Gráfico de Rosca (Categorías)
+        const ctxCat = document.getElementById('categoriesChart').getContext('2d');
+        new Chart(ctxCat, {
+            type: 'doughnut',
+            data: {
+                labels: ['Tecnología', 'Papelería', 'Servicios', 'Otros'],
+                datasets: [{
+                    data: [45, 25, 20, 10],
+                    backgroundColor: ['#2563eb', '#10b981', '#f59e0b', '#8b5cf6']
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
+        });
+    </script>
+
+</body>
+</html>
