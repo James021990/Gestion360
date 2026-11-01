@@ -211,4 +211,78 @@ document.addEventListener('DOMContentLoaded', () => {
             if (lblTotal) lblTotal.textContent = formatCurrency(total);
         }
 
-        
+        // Buscador de productos en tiempo real
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                document.querySelectorAll('#catalogList .product-item').forEach(item => {
+                    const nombre = item.dataset.nombre.toLowerCase();
+                    const id = item.dataset.id.toLowerCase();
+                    item.style.display = (nombre.includes(query) || id.includes(query)) ? 'flex' : 'none';
+                });
+            });
+        }
+
+        // Botón Cancelar / Vaciar Carrito
+        if (btnCancelarFactura) {
+            btnCancelarFactura.addEventListener('click', () => {
+                if (cart.length > 0 && confirm('¿Estás seguro de vaciar la factura actual?')) {
+                    cart = [];
+                    renderCart();
+                }
+            });
+        }
+
+        // Botón Procesar Venta
+        if (btnProcesar) {
+            btnProcesar.addEventListener('click', () => {
+                if (cart.length === 0) {
+                    alert('Debes agregar al menos un producto para procesar la venta.');
+                    return;
+                }
+                alert('¡Venta procesada con éxito! Generando factura electrónica FAC-2026-00925...');
+                cart = [];
+                renderCart();
+            });
+        }
+
+        renderCart();
+    }
+
+// ==========================================================
+// VALIDACIÓN DEL LOGIN (login.html)
+// ==========================================================
+    const loginForm = document.querySelector("#login");
+    const msgLogin = document.querySelector("#msg-login");
+    const inputU = document.querySelector("#u");
+    const inputPw = document.querySelector("#pw");
+
+    // Verificamos que absolutamente TODOS los elementos existan en la página actual
+    if (loginForm && msgLogin && inputU && inputPw) {
+        loginForm.addEventListener("submit", (e) => {
+            // 1. Detenemos el envío automático del formulario
+            e.preventDefault();
+
+            // 2. Capturamos los valores de forma segura ya que sabemos que existen
+            const correo = inputU.value.trim();
+            const clave = inputPw.value;
+
+            // 3. Evaluamos las condiciones de seguridad
+            if (!correo.includes("@")) {
+                msgLogin.textContent = "⚠️ Escribe un correo válido que incluya '@'.";
+                msgLogin.style.color = "#dc2626"; // Color rojo de alerta
+            } else if (clave.length < 8) {
+                msgLogin.textContent = "⚠️ La contraseña debe tener mínimo 8 caracteres.";
+                msgLogin.style.color = "#dc2626";
+            } else {
+                // 4. Si todo está correcto
+                msgLogin.textContent = "✅ ¡Datos listos! Ingresando al sistema...";
+                msgLogin.style.color = "#059669"; // Color verde de éxito
+
+                // Redirigir automáticamente al dashboard después de 1 segundo
+                setTimeout(() => {
+                    window.location.href = "dashboard.html";
+                }, 1000);
+            }
+        });
+    }
