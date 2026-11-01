@@ -14,8 +14,8 @@
                 <img src="img/logo.png" alt="Gestión 360" class="header-logo">
             </div>
             <nav class="nav-links">
-                <a href="#" class="nav-item">Dashboard</a>
-                <a href="#" class="nav-item active">Usuarios</a>
+                <a href="dashboard.html" class="nav-item">Dashboard</a>
+                <a href="usuarios.html" class="nav-item active">Usuarios</a>
                 <a href="#" class="nav-item">Inventario</a>
                 <a href="#" class="nav-item">Ventas</a>
             </nav>
@@ -32,7 +32,7 @@
                 <h1>Gestión de Usuarios</h1>
                 <p class="subtitle">Administra los accesos y roles del personal del ERP</p>
             </div>
-            <button class="btn-primary" onclick="toggleModal(true)">+ Crear Nuevo Usuario</button>
+            <button class="btn-primary" id="btnNuevoUsuario">+ Crear Nuevo Usuario</button>
         </div>
 
         <section class="card">
@@ -80,7 +80,7 @@
         <div class="modal-card">
             <header class="modal-header">
                 <h2>Registrar Nuevo Usuario</h2>
-                <button class="btn-close" onclick="toggleModal(false)">&times;</button>
+                <button class="btn-close" id="btnCerrarModal">&times;</button>
             </header>
 
             <form action="/usuarios/crear" method="POST" class="modal-body">
@@ -111,18 +111,13 @@
                 </div>
 
                 <footer class="modal-footer">
-                    <button type="button" class="btn-secondary" onclick="toggleModal(false)">Cancelar</button>
+                    <button type="button" class="btn-secondary" id="btnCancelarModal">Cancelar</button>
                     <button type="submit" class="btn-submit">Guardar Usuario</button>
                 </footer>
             </form>
         </div>
     </div>
 
-    <script>
-        function toggleModal(show) {
-            const modal = document.getElementById('userModal');
-            modal.style.display = show ? 'flex' : 'none';
-        }
-    </script>
+    <script src="js/main.js"></script>
 </body>
 </html>
