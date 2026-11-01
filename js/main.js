@@ -93,3 +93,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 });
+
+// ==========================================================
+    //LÓGICA DEL PUNTO DE VENTA / CARRITO (factura.html)
+    // ==========================================================
+    const cartTableBody = document.getElementById('cartTableBody');
+    
+    if (cartTableBody) {
+        let cart = [];
+        const lblSubtotal = document.getElementById('lblSubtotal');
+        const lblIva = document.getElementById('lblIva');
+        const lblTotal = document.getElementById('lblTotal');
+        const searchInput = document.getElementById('searchInput');
+        const btnCancelarFactura = document.getElementById('btnCancelar');
+        const btnProcesar = document.getElementById('btnProcesar');
+
+        
