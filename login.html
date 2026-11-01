@@ -19,16 +19,18 @@
                 <p>Ingresa tus credenciales para acceder al sistema</p>
             </header>
 
-            <form action="/login" method="POST">
+            <form id="login" novalidate>
                 <div class="form-group">
-                    <label for="username">Usuario o Correo</label>
-                    <input type="text" id="username" name="username" placeholder="ejemplo@empresa.com" required>
+                    <label for="u">Correo Electrónico</label>
+                    <input type="email" id="u" name="u" placeholder="ejemplo@empresa.com" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="password">Contraseña</label>
-                    <input type="password" id="password" name="password" placeholder="••••••••" required>
+                    <label for="pw">Contraseña</label>
+                    <input type="password" id="pw" name="pw" placeholder="••••••••" required>
                 </div>
+
+                <p id="msg-login" style="font-size: 13px; margin-bottom: 15px; font-weight: 600;"></p>
 
                 <div class="form-actions">
                     <label class="checkbox-label">
