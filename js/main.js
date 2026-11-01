@@ -117,4 +117,24 @@ document.addEventListener('DOMContentLoaded', () => {
             }).format(amount);
         };
 
+        // Agregar producto al carrito desde las sugerencias
+        document.querySelectorAll('.btn-add-item').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const productCard = e.target.closest('.product-item');
+                const id = productCard.dataset.id;
+                const nombre = productCard.dataset.nombre;
+                const precio = parseFloat(productCard.dataset.precio);
+
+                const existingProduct = cart.find(item => item.id === id);
+
+                if (existingProduct) {
+                    existingProduct.cantidad += 1;
+                } else {
+                    cart.push({ id, nombre, precio, cantidad: 1 });
+                }
+
+                renderCart();
+            });
+        });
+
         
