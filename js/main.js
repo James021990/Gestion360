@@ -137,4 +137,78 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
+        // Renderizar tabla del carrito y recalcular totales
+        function renderCart() {
+            cartTableBody.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="5" style="text-align: center; color: #94a3b8; padding: 20px;">
+                            El carrito está vacío. Agrega productos desde el panel izquierdo.
+                        </td>
+                    </tr>
+                `;
+                calculateTotals(0);
+                return;
+            }
+
+            let subtotalAcumulado = 0;
+
+            cart.forEach((item, index) => {
+                const itemSubtotal = item.precio * item.cantidad;
+                subtotalAcumulado += itemSubtotal;
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>
+                        <strong>${item.nombre}</strong>
+                        <small>${item.id}</small>
+                    </td>
+                    <td>
+                        <input type="number" value="${item.cantidad}" min="1" class="qty-input" data-index="${index}">
+                    </td>
+                    <td>${formatCurrency(item.precio)}</td>
+                    <td><strong>${formatCurrency(itemSubtotal)}</strong></td>
+                    <td>
+                        <button class="btn-remove" data-index="${index}" title="Eliminar">🗑️</button>
+                    </td>
+                `;
+                cartTableBody.appendChild(row);
+            });
+
+            calculateTotals(subtotalAcumulado);
+            bindCartEvents();
+        }
+
+        // Vincular eventos internos de la tabla del carrito
+        function bindCartEvents() {
+            document.querySelectorAll('.qty-input').forEach(input => {
+                input.addEventListener('change', (e) => {
+                    const index = e.target.dataset.index;
+                    const newQty = parseInt(e.target.value);
+                    cart[index].cantidad = newQty > 0 ? newQty : 1;
+                    renderCart();
+                });
+            });
+
+            document.querySelectorAll('.btn-remove').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const index = e.target.dataset.index;
+                    cart.splice(index, 1);
+                    renderCart();
+                });
+            });
+        }
+
+        // Calcular Subtotal, IVA (19%) y Total
+        function calculateTotals(subtotal) {
+            const iva = subtotal * 0.19;
+            const total = subtotal + iva;
+
+            if (lblSubtotal) lblSubtotal.textContent = formatCurrency(subtotal);
+            if (lblIva) lblIva.textContent = formatCurrency(iva);
+            if (lblTotal) lblTotal.textContent = formatCurrency(total);
+        }
+
         
