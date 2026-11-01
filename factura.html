@@ -11,7 +11,7 @@
     <header class="app-header">
         <div class="header-container">
             <div class="logo-area">
-                <img src="img/logo.png" alt="Gestión 360" class="header-logo">
+                <img src="img/logo_gestion_360.png" alt="Gestión 360" class="header-logo">
             </div>
             <nav class="nav-links">
                 <a href="dashboard.html" class="nav-item">Dashboard</a>
@@ -67,12 +67,11 @@
                 <div class="card catalog-card">
                     <h2 class="card-title">🔍 Búsqueda Rápida de Productos</h2>
                     <div class="search-box">
-                        <input type="text" placeholder="Escribe el nombre o escanea el código de barras...">
-                        <button class="btn-search">Buscar</button>
+                        <input type="text" id="searchInput" placeholder="Escribe el nombre o código para filtrar...">
                     </div>
 
-                    <div class="product-suggestions">
-                        <div class="product-item">
+                    <div class="product-suggestions" id="catalogList">
+                        <div class="product-item" data-id="COD-001" data-nombre="Licencia Software ERP (1 Año)" data-precio="450000">
                             <div class="product-info">
                                 <strong>Licencia Software ERP (1 Año)</strong>
                                 <span class="product-code">COD-001 | Stock: 45</span>
@@ -81,7 +80,7 @@
                             <button class="btn-add-item">+ Agregar</button>
                         </div>
 
-                        <div class="product-item">
+                        <div class="product-item" data-id="COD-008" data-nombre="Soporte Técnico Especializado" data-precio="120000">
                             <div class="product-info">
                                 <strong>Soporte Técnico Especializado</strong>
                                 <span class="product-code">COD-008 | Stock: ∞</span>
@@ -90,12 +89,21 @@
                             <button class="btn-add-item">+ Agregar</button>
                         </div>
 
-                        <div class="product-item">
+                        <div class="product-item" data-id="COD-104" data-nombre="Teclado Mecánico Ergonómico" data-precio="180000">
                             <div class="product-info">
                                 <strong>Teclado Mecánico Ergonómico</strong>
                                 <span class="product-code">COD-104 | Stock: 12</span>
                             </div>
                             <span class="product-price">$ 180.000</span>
+                            <button class="btn-add-item">+ Agregar</button>
+                        </div>
+
+                        <div class="product-item" data-id="COD-105" data-nombre="Mouse Inalámbrico Recargable" data-precio="85000">
+                            <div class="product-info">
+                                <strong>Mouse Inalámbrico Recargable</strong>
+                                <span class="product-code">COD-105 | Stock: 30</span>
+                            </div>
+                            <span class="product-price">$ 85.000</span>
                             <button class="btn-add-item">+ Agregar</button>
                         </div>
                     </div>
@@ -117,27 +125,7 @@
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <strong>Licencia Software ERP</strong>
-                                        <small>COD-001</small>
-                                    </td>
-                                    <td><input type="number" value="1" min="1" class="qty-input"></td>
-                                    <td>$ 450.000</td>
-                                    <td>$ 450.000</td>
-                                    <td><button class="btn-remove" title="Eliminar">🗑️</button></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <strong>Soporte Técnico</strong>
-                                        <small>COD-008</small>
-                                    </td>
-                                    <td><input type="number" value="2" min="1" class="qty-input"></td>
-                                    <td>$ 120.000</td>
-                                    <td>$ 240.000</td>
-                                    <td><button class="btn-remove" title="Eliminar">🗑️</button></td>
-                                </tr>
+                            <tbody id="cartTableBody">
                             </tbody>
                         </table>
                     </div>
@@ -145,22 +133,21 @@
                     <div class="invoice-summary">
                         <div class="summary-row">
                             <span>Subtotal:</span>
-                            <strong>$ 690.000</strong>
+                            <strong id="lblSubtotal">$ 0</strong>
                         </div>
                         <div class="summary-row">
                             <span>IVA (19%):</span>
-                            <strong>$ 131.100</strong>
+                            <strong id="lblIva">$ 0</strong>
                         </div>
                         <div class="summary-row total-row">
                             <span>Total a Pagar:</span>
-                            <strong class="total-amount">$ 821.100</strong>
+                            <strong class="total-amount" id="lblTotal">$ 0</strong>
                         </div>
                     </div>
 
-                    <!-- Botones de Acción Final -->
                     <div class="action-buttons">
-                        <button class="btn-secondary">Cancelar</button>
-                        <button class="btn-primary">⚡ Procesar y Facturar</button>
+                        <button class="btn-secondary" id="btnCancelar">Limpiar Factura</button>
+                        <button class="btn-primary" id="btnProcesar">⚡ Procesar y Facturar</button>
                     </div>
                 </div>
             </section>
@@ -168,5 +155,6 @@
         </div>
     </main>
 
+    <script src="js/main.js"></script>
 </body>
 </html>

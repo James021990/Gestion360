@@ -214,54 +214,7 @@
         </div>
     </div>
 
-    <script>
-        document.querySelectorAll('.dropdown-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                const container = button.nextElementSibling;
-                const arrow = button.querySelector('.arrow');
-                
-                // Alternar visibilidad
-                if (container.style.display === "block") {
-                    container.style.display = "none";
-                    arrow.style.transform = "rotate(0deg)";
-                } else {
-                    container.style.display = "block";
-                    arrow.style.transform = "rotate(90deg)";
-                }
-            });
-        });
-
-        const ctxSales = document.getElementById('salesChart').getContext('2d');
-        new Chart(ctxSales, {
-            type: 'line',
-            data: {
-                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct'],
-                datasets: [{
-                    label: 'Ventas ($ COP)',
-                    data: [25000000, 28000000, 32000000, 30000000, 38000000, 42000000, 40000000, 44000000, 41000000, 45850000],
-                    borderColor: '#2563eb',
-                    backgroundColor: 'rgba(37, 99, 235, 0.1)',
-                    fill: true,
-                    tension: 0.4
-                }]
-            },
-            options: { responsive: true, maintainAspectRatio: false }
-        });
-
-        // 3. Gráfico de Rosca (Categorías)
-        const ctxCat = document.getElementById('categoriesChart').getContext('2d');
-        new Chart(ctxCat, {
-            type: 'doughnut',
-            data: {
-                labels: ['Tecnología', 'Papelería', 'Servicios', 'Otros'],
-                datasets: [{
-                    data: [45, 25, 20, 10],
-                    backgroundColor: ['#2563eb', '#10b981', '#f59e0b', '#8b5cf6']
-                }]
-            },
-            options: { responsive: true, maintainAspectRatio: false }
-        });
-    </script>
+    <script src="js/main.js"></script>
 
 </body>
 </html>
