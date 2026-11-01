@@ -108,4 +108,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const btnCancelarFactura = document.getElementById('btnCancelar');
         const btnProcesar = document.getElementById('btnProcesar');
 
+        // Formateador de moneda (Pesos Colombianos)
+        const formatCurrency = (amount) => {
+            return new Intl.NumberFormat('es-CO', {
+                style: 'currency',
+                currency: 'COP',
+                minimumFractionDigits: 0
+            }).format(amount);
+        };
+
         
